@@ -1,16 +1,20 @@
 ## Movie Hub
 
 The application provides the basic steps to implementing a recycler view and 
-bindig data to it.
+binding data to it.
 
 Each branch represents a subset of tasks that can be completed by following the
-```TODOs.```
+```java
+// TODO
+```
 
  _To access the TODOs_
 
 1. git clone this repository then do a git checkout to one of the branches
 e.g 
-```git git checkout feature-create-recyclerview```
+```git
+ git checkout feature-create-recyclerview
+```
 2. import the project into android studio and on the bottom left once its done
 syncing click on the TODOs panel
 
