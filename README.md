@@ -18,6 +18,14 @@ e.g
 2. import the project into android studio and on the bottom left once its done
 syncing click on the TODOs panel
 
+#### Prerequisites
+ 
+ 1. **Obtain Key**
+ 
+ Create an account with TMDB to obtain an API key then place it in loadData function
+ in Main Activity(Please do note that this is for testing purposes API Keys should not be
+ exposed).
+ 
 
 ### License
 
