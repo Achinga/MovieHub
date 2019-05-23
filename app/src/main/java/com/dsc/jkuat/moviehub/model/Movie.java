@@ -1,15 +1,21 @@
 package com.dsc.jkuat.moviehub.model;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.Objects;
 
 
 public final class Movie {
 
     private String title;
-    private String ratings;
+
+    @SerializedName("vote_average")
+    private float ratings;
+
+    @SerializedName("id")
     private int movieId;
 
-    public Movie(String title, String ratings) {
+    public Movie(String title, float ratings) {
         this.title = title;
         this.ratings = ratings;
     }
@@ -18,19 +24,11 @@ public final class Movie {
         return title;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getRatings() {
+    public float getRatings() {
         return ratings;
     }
 
-    public void setRatings(String ratings) {
-        this.ratings = ratings;
-    }
-
-    int getMovieId() {
+    private int getMovieId() {
         return movieId;
     }
 

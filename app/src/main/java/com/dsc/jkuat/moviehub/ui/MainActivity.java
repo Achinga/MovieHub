@@ -1,35 +1,66 @@
 package com.dsc.jkuat.moviehub.ui;
 
 import android.os.Bundle;
+import android.util.Log;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.dsc.jkuat.moviehub.R;
-import com.dsc.jkuat.moviehub.data.DummyDataKt;
+import com.dsc.jkuat.moviehub.model.Movie;
+import com.dsc.jkuat.moviehub.service.MovieListResponse;
+import com.dsc.jkuat.moviehub.service.MoviesApi;
+import com.dsc.jkuat.moviehub.service.MoviesApiService;
+
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
+
+    private RecyclerView mRvMovies;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        RecyclerView rvMovies = findViewById(R.id.recycler_view_movies);
-        initRecyclerView(rvMovies);
+        mRvMovies = findViewById(R.id.recycler_view_movies);
+//        initRecyclerView(rvMovies)
+        loadData();
     }
 
-    private void initRecyclerView(RecyclerView rvMovies) {
+    private void initRecyclerView(RecyclerView rvMovies, MoviesAdapter adapter) {
         rvMovies.setLayoutManager(new LinearLayoutManager(this));
-        MoviesAdapter vMoviesAdapter = new MoviesAdapter(DummyDataKt.provideDummyData());
+//        MoviesAdapter vMoviesAdapter = new MoviesAdapter(DummyDataKt.provideDummyData());
         rvMovies.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
-        rvMovies.setAdapter(vMoviesAdapter);
+        rvMovies.setAdapter(adapter);
     }
-//    TODO 1. Create an account with movie provider api and get an api key for data access
-//    TODO 2. Import a http library like Retrofit that will carry out async or sync requests
-//     (you can check out Volley too)
-//    TODO 3. Create an interface that defines endpoints to the data you wish to access
-//    TODO 4. Create an instance to Retrofit using the builder class that will facilitate calls to the endpoints
-//     and return responses eg query for upcoming movies should return a list of upcoming movies
+
+    private void loadData() {
+        MoviesApi vMoviesApi = MoviesApiService.INSTANCE.getInstance();
+        vMoviesApi
+                .getPopularMovies("Put Your Api Key Here Only For Now")
+                .enqueue(new Callback<MovieListResponse>() {
+                    @Override
+                    public void onResponse(@NonNull Call<MovieListResponse> call, @NonNull Response<MovieListResponse> response) {
+                        if (response.body() != null) {
+                            List<Movie> listOfMovies = response.body().component1();
+                            if (!listOfMovies.isEmpty())
+                                initRecyclerView(mRvMovies, new MoviesAdapter(listOfMovies));
+//                                Log.d(MainActivity.class.getSimpleName(), vMovies.get(0).toString());
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(@NonNull Call<MovieListResponse> call, @NonNull Throwable t) {
+                        Log.e(MainActivity.class.getSimpleName(), t.getMessage());
+                    }
+                });
+    }
+
 }
