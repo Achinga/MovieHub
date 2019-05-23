@@ -23,7 +23,13 @@ public class MainActivity extends AppCompatActivity {
     private void initRecyclerView(RecyclerView rvMovies) {
         rvMovies.setLayoutManager(new LinearLayoutManager(this));
         MoviesAdapter vMoviesAdapter = new MoviesAdapter(DummyDataKt.provideDummyData());
-        rvMovies.addItemDecoration(new DividerItemDecoration(this,DividerItemDecoration.VERTICAL));
+        rvMovies.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
         rvMovies.setAdapter(vMoviesAdapter);
     }
+//    TODO 1. Create an account with movie provider api and get an api key for data access
+//    TODO 2. Import a http library like Retrofit that will carry out async or sync requests
+//     (you can check out Volley too)
+//    TODO 3. Create an interface that defines endpoints to the data you wish to access
+//    TODO 4. Create an instance to Retrofit using the builder class that will facilitate calls to the endpoints
+//     and return responses eg query for upcoming movies should return a list of upcoming movies
 }
