@@ -29,7 +29,9 @@ public class MainActivity extends AppCompatActivity {
 //    TODO 1. Create an account with movie provider api and get an api key for data access
 //    TODO 2. Import a http library like Retrofit that will carry out async or sync requests
 //     (you can check out Volley too)
-//    TODO 3. Create an interface that defines endpoints to the data you wish to access
-//    TODO 4. Create an instance to Retrofit using the builder class that will facilitate calls to the endpoints
+//    TODO 3. Add Internet Permission
+//    TODO 4. Create an interface that defines endpoints to the data you wish to access
+//    TODO 5. Create an instance to Retrofit using the builder class that will facilitate calls to the endpoints
 //     and return responses eg query for upcoming movies should return a list of upcoming movies
+//    TODO 6. Bind Movie List Data to Recycler View
 }
